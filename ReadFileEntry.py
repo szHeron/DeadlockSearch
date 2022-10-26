@@ -2,10 +2,10 @@ import numpy as np
 
 def ReadFileEntry():
     file = open('entrada.txt', 'r')
-    process = int(file.readline(1))
+    numberOfProcess = int(file.readline(1))
     resources = int(file.readline(3))
-    matrixAllocations = np.zeros((process, resources))
-    matrixResources = np.zeros((process, resources))
+    matrixAllocations = np.zeros((numberOfProcess, resources))
+    matrixResources = np.zeros((numberOfProcess, resources))
     existingResources = []
     disponibleResources = []
     espaces = 0
@@ -29,4 +29,4 @@ def ReadFileEntry():
                 steps += 1
                 
     file.close()
-    return existingResources, disponibleResources, matrixAllocations, matrixResources
+    return existingResources, disponibleResources, matrixAllocations, matrixResources, numberOfProcess

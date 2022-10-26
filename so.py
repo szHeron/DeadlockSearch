@@ -1,6 +1,6 @@
 from ReadFileEntry import ReadFileEntry
 
-existingResources, disponibleResources, matrixAllocations, matrixResources = ReadFileEntry()
+existingResources, disponibleResources, matrixAllocations, matrixResources, numberOfProcess = ReadFileEntry()
 Deadlock = False
 
 #Deadlocks por processos que requisitam mais que o total disponivel
@@ -24,18 +24,21 @@ def EnoughtResources(process, temp):
 def SearchDeadLocks():
     tempDisponibleResources = disponibleResources
     deadLockCounts = 0
-    for processIndex, process in enumerate(matrixResources):
-        instances = EnoughtResources(process, tempDisponibleResources)
-        if len(instances) < 1:
-            for i, x in enumerate(matrixAllocations[processIndex]):
-                tempDisponibleResources[i] += x
-                matrixAllocations[processIndex][i] = 0
-            print(tempDisponibleResources)
-        else:
-            deadLockCounts+=1
-            print(f'Processo P{processIndex+1} em Deadlock ->')
-            for j in instances:
-                print('\t',j)
+    steps = 0
+    for line in range(numberOfProcess):
+        steps = 0
+        for processIndex, process in enumerate(matrixResources):
+            steps += 1
+            instances = EnoughtResources(process, tempDisponibleResources)
+            if len(instances) < 1:
+                for i, x in enumerate(matrixAllocations[processIndex]):
+                    tempDisponibleResources[i] += x
+                    matrixAllocations[processIndex][i] = 0
+            elif len(instances) > 0 and line+1 == numberOfProcess:
+                deadLockCounts+=1
+                print(f'Processo P{processIndex+1} em Deadlock ->')
+                for j in instances:
+                    print('\t',j)
     if deadLockCounts > 0:
         return True
     else:
@@ -44,5 +47,5 @@ def SearchDeadLocks():
 Deadlock = InsufficientResources()
 if not Deadlock:
     Deadlock = SearchDeadLocks()
-elif not Deadlock:
-    print("Todos os processos estão finalizados!")
+    if not Deadlock:
+        print("Todos os processos estão finalizados!")
