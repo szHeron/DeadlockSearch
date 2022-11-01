@@ -3,15 +3,6 @@ from ReadFileEntry import ReadFileEntry
 existingResources, disponibleResources, matrixAllocations, matrixResources, numberOfProcess = ReadFileEntry()
 Deadlock = False
 
-#Deadlocks por processos que requisitam mais que o total disponivel
-def InsufficientResources():
-    for processIndex,process in enumerate(matrixResources):
-        for i, p in enumerate(process):
-            if p > existingResources[i]:
-                print(f"O processo P{processIndex+1} está em espera e aguardando {int(p-existingResources[i])} instancias de R{int(existingResources[i])}")
-                return True
-    return False
-
 #Verificar se os recursos disponiveis suprem a requisição do processo
 def EnoughtResources(process, temp):
     instances = []
@@ -24,13 +15,10 @@ def EnoughtResources(process, temp):
 def SearchDeadLocks():
     tempDisponibleResources = disponibleResources
     deadLockCounts = 0
-    steps = 0
     for line in range(numberOfProcess):
-        steps = 0
         for processIndex, process in enumerate(matrixResources):
-            steps += 1
             instances = EnoughtResources(process, tempDisponibleResources)
-            if len(instances) < 1:
+            if len(instances) < 1:  
                 for i, x in enumerate(matrixAllocations[processIndex]):
                     tempDisponibleResources[i] += x
                     matrixAllocations[processIndex][i] = 0
@@ -44,8 +32,6 @@ def SearchDeadLocks():
     else:
         return False
 
-Deadlock = InsufficientResources()
+Deadlock = SearchDeadLocks()
 if not Deadlock:
-    Deadlock = SearchDeadLocks()
-    if not Deadlock:
-        print("Todos os processos estão finalizados!")
+    print("Todos os processos estão finalizados!")
