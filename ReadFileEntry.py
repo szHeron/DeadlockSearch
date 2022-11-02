@@ -5,7 +5,7 @@ def ReadFileEntry():
     numberOfProcess = int(file.readline(1))
     resources = int(file.readline(3))
     matrixAllocations = np.zeros((numberOfProcess, resources))
-    matrixResources = np.zeros((numberOfProcess, resources))
+    matrixRequistions = np.zeros((numberOfProcess, resources))
     existingResources = []
     disponibleResources = []
     espaces = 0
@@ -25,8 +25,8 @@ def ReadFileEntry():
                 matrixAllocations[steps] = [int(numeric_string) for numeric_string in line]
                 steps += 1
             elif espaces == 4:
-                matrixResources[steps] = [int(numeric_string) for numeric_string in line]
+                matrixRequistions[steps] = [int(numeric_string) for numeric_string in line]
                 steps += 1
                 
     file.close()
-    return existingResources, disponibleResources, matrixAllocations, matrixResources, numberOfProcess
+    return existingResources, disponibleResources, matrixAllocations, matrixRequistions, numberOfProcess
