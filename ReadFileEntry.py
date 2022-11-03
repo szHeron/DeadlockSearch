@@ -2,8 +2,9 @@ import numpy as np
 
 def ReadFileEntry():
     file = open('entrada.txt', 'r')
-    numberOfProcess = int(file.readline(1))
-    resources = int(file.readline(3))
+    arq = file.readline()
+    numberOfProcess = int(arq.split()[0])
+    resources = int(arq.split()[1])
     matrixAllocations = np.zeros((numberOfProcess, resources))
     matrixRequistions = np.zeros((numberOfProcess, resources))
     existingResources = []
