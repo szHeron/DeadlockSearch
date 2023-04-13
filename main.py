@@ -30,9 +30,9 @@ def SearchDeadLocks():
             for index, y in enumerate(x):
                 if index == 0:
                     if deadLockCounts == 1:
-                        print(f'Processo P{y} em ESPERA ->')
+                        print(f"Processo P{y} em ESPERA ->")
                     else:
-                        print(f'Processo P{y} em DEADLOCK ->')
+                        print(f"Processo P{y} em DEADLOCK ->")
                 else:
                     print('\t', y)
         return True
