@@ -6,7 +6,7 @@ def EnoughtResources(process, temp):
     instances = []
     for i, p in enumerate(process):
         if p > temp[i]:
-            instances.append(f'R{i+1} necessita de {int(p) - temp[i]} instancias')
+            instances.append(f"R{i+1} necessita de {int(p) - temp[i]} instancias")
     return instances
 
 def SearchDeadLocks():
