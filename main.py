@@ -34,7 +34,7 @@ def SearchDeadLocks():
                     else:
                         print(f"Processo P{y} em DEADLOCK ->")
                 else:
-                    print('\t', y)
+                    print("\t", y)
         return True
     else:
         print("Todos os processos estão finalizados!")
